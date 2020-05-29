@@ -1,0 +1,63 @@
+---
+title: "Function read.datasets()"
+author: "Camilo Martinez"
+date: "29/5/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+```{r echo=TRUE}
+read.datasets <- function(directory,id=1:x, na.rm = TRUE){ #directory is the folder path
+                                                             #id is number of files to read
+        setwd(directory)                                     
+        directorio <- dir()
+        datos <- data.frame()
+        x <- length(directorio)
+        
+        for(i in directorio[id]){
+                datos <- rbind(datos,read.csv(i))
+        }
+        
+        if(na.rm == TRUE){
+                datos2 <- na.omit(datos)
+        } else{
+                datos2 <- datos
+        }
+}
+
+```
+  
+
+## **FUNCTION read.datasets() in action:**  
+
+
+The directory contains the next files as example:  
+![Caption for the picture.](C:/Users/camil/OneDrive/Escritorio/R-programming/R-programming/datasets.png)
+  
+
+The files are delimited by commas in csv.  
+
+
+```{r echo=TRUE}
+datos <- read.datasets(directory = "C:/Users/camil/OneDrive/Escritorio/R-programming/R-programming/specdata") 
+```
+  
+In this way, by defect the function reads all of datasets in the directory. In this case "spectdata".
+The NAs are omitted.  
+
+
+```{r echo=TRUE}
+datos <- read.datasets(directory = "C:/Users/camil/OneDrive/Escritorio/R-programming/R-programming/specdata",id = 1:2, na.rm = FALSE)
+```
+Here, datos contains the first and the second dataset in the specified directory.
+The parameter na.rm is FALSE. So, NAs are not omitted.  
+
+
+
+
+
